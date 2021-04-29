@@ -1,0 +1,26 @@
+.header {
+    grid-area: h;
+    background-color: #6d4b60;
+}
+
+.auth__block {
+    padding: 5px;
+    float: right;
+}
+
+.login {
+    margin: 3px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.btn {
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+.login__photo {
+    max-height: 50px;
+    margin: 5px;
+}

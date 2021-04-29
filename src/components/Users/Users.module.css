@@ -1,0 +1,63 @@
+.container {
+    margin: 10px 10px 30px;
+    text-align: center;
+}
+
+.user {
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.img__container {
+    text-align: center;
+}
+
+.user__img {
+    width: 100px;
+}
+
+.user__info {
+    margin: 0 10px;
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f7efef;
+
+}
+
+.btn {
+    width: 100px;
+    padding: 5px 0;
+    background-color: #ffffff;
+    border: none;
+}
+
+.btn__pages:hover {
+   cursor: pointer;
+}
+
+.selectorNumbers {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+
+.selectedPage {
+    padding: 0 3px;
+    font-weight: bold;
+}
+
+.selectedPage:hover {
+    cursor: pointer;
+}
+
+.unselectedPage {
+    padding: 0 3px;
+}
+
+.unselectedPage:hover {
+    cursor: pointer;
+}

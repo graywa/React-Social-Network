@@ -1,0 +1,14 @@
+.error textarea,
+.error input {
+    border: red 2px solid
+}
+
+.messageError,
+.sumError
+{
+    background-color: #a45b5b;
+    margin: 5px;
+    padding: 5px;
+    font-size: 12px;
+    color: white;
+}
