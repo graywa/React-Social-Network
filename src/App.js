@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Music from "./components/Music/Music"
 import News from "./components/News/News"
 import Settings from "./components/Settings/Settings"
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom"
+import {Redirect, Route, Switch} from "react-router-dom"
 import React, {Component} from "react"
 import UsersContainer from "./components/Users/UsersContainer"
 import HeaderContainer from "./components/Header/HeaderContainer"
@@ -24,23 +24,23 @@ class App extends Component {
 
   render() {
 
-    if (!this.props.initialized) return <Preloader/>
+    if (!this.props.initialized) return <Preloader />
 
     return (
       <div className="app-wrapper">
-        <HeaderContainer/>
-        <Navbar/>
+        <HeaderContainer />
+        <Navbar />
         <div className="app-wrapper-content">
           <Switch>
-            <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
-            <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-            <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
-            <Route path="/users" render={() => <UsersContainer/>}/>
-            <Route path="/login" render={() => <LoginPage/>}/>
-            <Route path="/music" component={Music}/>
-            <Route path="/news" component={News}/>
-            <Route path="/settings" component={Settings}/>
-            <Route path="*" render={() => <div>404 page not found</div>}/>
+            <Route exact path='/' render={() => <Redirect to='/profile'/>} />
+            <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+            <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={() => <LoginPage />} />
+            <Route path="/music" component={Music} />
+            <Route path="/news" component={News} />
+            <Route path="/settings" component={Settings} />
+            <Route path="*" render={() => <div>404 page not found</div>} />
           </Switch>
         </div>
       </div>

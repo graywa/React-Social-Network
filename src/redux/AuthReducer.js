@@ -15,11 +15,9 @@ let initialState = {
 
 const setAuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH__USER: {
-      return {...state, ...action.data}
-    }
+    case AUTH__USER:
     case CAPTCHA__URL: {
-      return {...state, captchaUrl: action.captchaUrl}
+      return {...state, ...action.data}
     }
     default:
       return state
@@ -33,7 +31,7 @@ export const setAuthUser = (userId, email, login, isAuth) => ({
 
 export const setCaptchaUrl = (captchaUrl) => ({
   type: 'CAPTCHA__URL',
-  captchaUrl
+  data: captchaUrl
 })
 
 export const getAuthUser = () => {

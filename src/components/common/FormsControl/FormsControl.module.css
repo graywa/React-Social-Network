@@ -1,6 +1,6 @@
-.error textarea,
-.error input {
-    border: red 2px solid
+.formControl.error textarea,
+.formControl.error input {
+    border: red 1px solid;
 }
 
 .messageError,
@@ -12,3 +12,34 @@
     font-size: 12px;
     color: white;
 }
+
+.btn {
+    text-align: center;
+}
+
+input, textarea {
+    border: 1px #dbdbdb solid;
+    width: 300px;
+}
+
+input[type="checkbox"] {
+    width: 10px;
+}
+
+.rememberMe {
+    margin: 0 0 30px 15px;
+    display: flex;
+
+}
+
+.login {
+    background-color: #faf7f7;
+    border-radius: 5px;
+    line-height: 1.7;
+    text-align: center;
+    width: 330px;
+    margin: 20px auto;
+    padding: 0 15px 15px;
+}
+
+

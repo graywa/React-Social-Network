@@ -2,7 +2,7 @@ import classes from "./ProfileInfo.module.css"
 import {Element} from "../../common/FormsControl/FormsControl"
 import {Field, reduxForm} from "redux-form"
 import {required} from "../../utilities/validators"
-import styles from "../../common/FormsControl/FormsControl.module.css";
+import styles from "../../common/FormsControl/FormsControl.module.css"
 
 const Input = Element('input')
 const TextArea = Element('textarea')
@@ -26,12 +26,14 @@ const ProfileDataForm = (props) => {
     <div>
        <div className={classes.contacts}>
         <b>Contacts:</b>
-        {Object.keys(props.profile.contacts).map(key => {
+        {
+          Object.keys(props.profile.contacts).map(key => {
           let name = 'contacts.' + key
           return <div key={key}>{key}:
             <Field name = {name}  component={Input} />
           </div>
-        })}
+          })
+        }
       </div>
       <div>
         <b>Looking for a job?</b>
@@ -45,10 +47,10 @@ const ProfileDataForm = (props) => {
           <Field name='lookingForAJobDescription' component={TextArea} validate={[required]}/>
         </span>
       </div>
-      <div >
+      <div>
         { props.error && <span className={styles.sumError}>{props.error}</span> }
       </div>
-      <div>
+      <div className={styles.btn}>
         <button>save</button>
       </div>
 

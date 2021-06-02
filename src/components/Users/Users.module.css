@@ -1,12 +1,10 @@
 .container {
-    margin: 10px 10px 30px;
-    text-align: center;
+    margin: 10px auto 30px;
 }
 
 .user {
-    text-align: center;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .img__container {
@@ -15,27 +13,41 @@
 
 .user__img {
     width: 100px;
+    transition: .2s;
+}
+
+.user__img:hover {
+   transform: translate3d(-2px, -2px, 0);
 }
 
 .user__info {
     margin: 0 10px;
     width: 400px;
     padding: 10px;
-    border: 1px solid #ffffff;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
-    background-color: #f7efef;
+    background-color: #faf7f7;
+}
 
+.user__name {
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.user__status {
+    max-width: 400px;
+    font-size: 14px;
+    overflow: hidden;
 }
 
 .btn {
     width: 100px;
     padding: 5px 0;
-    background-color: #ffffff;
-    border: none;
 }
 
+.btn:hover,
 .btn__pages:hover {
    cursor: pointer;
 }
@@ -46,6 +58,7 @@
 }
 
 .selectedPage {
+    font-size: 14px;
     padding: 0 3px;
     font-weight: bold;
 }
@@ -55,6 +68,7 @@
 }
 
 .unselectedPage {
+    font-size: 14px;
     padding: 0 3px;
 }
 

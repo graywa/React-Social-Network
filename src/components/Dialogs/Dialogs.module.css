@@ -1,26 +1,34 @@
 .dialogs {
     display: grid;
     grid-template-columns: 1fr 5fr;
-}
-
-.dialogItem {
     padding: 10px;
-}
-
-.dialogItem .active {
-    color: #0606c4;
 }
 
 .dialog {
-    padding: 10px;
+    padding: 5px;
+}
+
+.dialog a{
+    color: #6e4c61;
+    text-decoration: none;
+}
+
+.dialog a.active {
+    color: #67475d;
+    font-weight: bold;
 }
 
 .messages {
-
+    margin-right: 100px;
+    text-align: right;
 }
 
 .message {
+    padding: 10px;
+}
 
+.newMessage {
+    padding-bottom: 20px;
 }
 
 .users {

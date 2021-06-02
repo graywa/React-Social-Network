@@ -10,7 +10,7 @@ const FOLLOW = 'FOLLOW',
 
 let initialState = {
   usersData: [],
-  usersOnPage: 10,
+  usersOnPage: 20,
   totalUsers: 0,
   currentPage: 1,
   isFetching: false,

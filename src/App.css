@@ -1,8 +1,9 @@
 .app-wrapper {
     font-family: 'Roboto', sans-serif;
+    color: #4c4247;
     display: grid;
     margin: 0 auto;
-    width: 800px;
+    width: 750px;
 
     grid-template-areas:
     "h h h"
@@ -18,6 +19,27 @@
     background-color: #f1ebeb;
 }
 
+input, textarea {
+    background-color: #f9f7f7;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #6f4d62;
+    color: #f1ebeb;
+    border: none;
+    padding: 5px 15px;
+    transition: .2s;
+    border-radius: 3px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #86657d;
+}
 
 
 

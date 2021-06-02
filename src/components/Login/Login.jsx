@@ -1,4 +1,3 @@
-import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {Element} from '../common/FormsControl/FormsControl'
 import {required} from '../utilities/validators'
@@ -20,8 +19,8 @@ const LoginForm = (props) => {
         <Field
           placeholder='password' name='password' component={Input} validate={[required]} type='password'/>
       </div>
-      <div>
-        <Field type='checkbox' name='rememberMe' component={Input}  /> remember me
+      <div className={styles.rememberMe}>
+        <span>remember me</span> <Field type='checkbox' name='rememberMe' component={Input} />
       </div>
       <div >
         { props.error && <span className={styles.sumError}>{props.error}</span> }
@@ -32,8 +31,8 @@ const LoginForm = (props) => {
           <Field placeholder='enter symbols' name='captcha' component={Input} validate={[required]} />
         </div>}
       </div>
-      <div>
-        <button>Login</button>
+      <div className={styles.btn}>
+        <button className={styles.btn}>Login</button>
       </div>
     </form>
   )
@@ -52,7 +51,7 @@ const Login = (props) => {
   if(props.isAuth) return <Redirect to={'/profile'} />
 
   return (
-    <div>
+    <div className={styles.login}>
       <h1>Login</h1>
       <LoginFormRedux onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>

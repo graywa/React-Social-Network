@@ -66,7 +66,7 @@ export default connect (mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
-    setToggleFollow,
+    //setToggleFollow,
     getUsers,
 }) (UsersContainer);
 

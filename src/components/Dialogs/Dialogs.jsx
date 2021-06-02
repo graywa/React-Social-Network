@@ -1,10 +1,6 @@
-import React from "react"
-import {Redirect} from "react-router-dom"
 import classes from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom"
 import DialogItem from "./DialogItem/DialogItem"
 import Message from "./Message/Message"
-import { newUserCreator, updateNewUserCreator,} from '../../redux/store'
 import {reduxForm, Field} from "redux-form"
 import {required, maxLengthCreator} from "../utilities/validators"
 import {Element} from "../common/FormsControl/FormsControl"
@@ -21,7 +17,8 @@ const MessageForm = (props) => {
           name='newMessage'
           component={TextArea}
           validate={[required, maxLength14]}
-        ></Field>
+          placeholder='Hello'
+        />
       </div>
       <div>
         <button>Send</button>
@@ -32,17 +29,17 @@ const MessageForm = (props) => {
 
 const MessageFormRedux = reduxForm({
   form: 'message'
-}) (MessageForm)
+})(MessageForm)
 
 const Dialogs = (props) => {
 
   let state = props.dialogsPage
 
   let dialogsElements = state.dialogsData
-    .map (dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>)
+    .map(dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
   let messagesElements = state.messagesData
-    .map( message => <Message message={message.message} key={message.id}/>)
+    .map(message => <Message message={message.message} key={message.id}/>)
 
   let onSendMessage = (values) => {
     props.sendMessage(values.newMessage)
@@ -51,17 +48,18 @@ const Dialogs = (props) => {
   return (
     <div className={classes.dialogs}>
       <div>
-        <div>
-          {dialogsElements}
-        </div>
+        {dialogsElements}
       </div>
-      <div>
-        <div className={classes.messages}>
+
+      <div className={classes.messages}>
+        <div>
           {messagesElements}
         </div>
-        <MessageFormRedux
-          onSubmit={onSendMessage}
-        />
+        <div className={classes.newMessage}>
+          <MessageFormRedux
+            onSubmit={onSendMessage}
+          />
+        </div>
       </div>
     </div>
   )

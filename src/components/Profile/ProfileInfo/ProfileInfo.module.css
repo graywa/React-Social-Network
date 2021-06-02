@@ -3,30 +3,63 @@
 }
 
 .description {
-    line-height: 1.5;
-    margin: 20px 20px 50px;
+    width: 365px;
+    border-radius: 5px;
+    line-height: 1.7;
+    margin: 10px 20px 50px;
+    padding: 10px;
+    background-color: #faf7f7;
 }
 
 .cover {
     text-align: center;
 }
 
-.userPhoto {
-    max-width: 200px;
-    margin: 5px;
+.cover__img {
+    width: 100%;
 }
 
-.input {
+.userPhoto {
+    max-width: 200px;
+    margin: 10px 0 0 10px;
+}
 
+.btnSave {
+    margin-top: 15px;
+    text-align: center;
 }
 
 input[type="file"] {
+    margin: 0 auto;
     display: none;
+    text-align: center;
 }
+
 .labelInput {
+    margin-left: 55px;
     font-size: 14px;
-    border: 1px solid #7d7d7d;
     display: inline-block;
     padding: 3px 8px;
     cursor: pointer;
+    background-color: #6f4d62;
+    border-radius: 3px;
+    color: #f1ebeb;
+    transition: .2s;
+}
+
+.labelInput:hover {
+    background-color: #7f586e;
+}
+
+.contact {
+    margin-left: 20px;
+}
+
+.status {
+
+}
+
+.status:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

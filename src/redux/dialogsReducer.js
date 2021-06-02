@@ -1,8 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
 
-export const newMessageActionCreator = (newMessage) => ({type: `ADD-MESSAGE`, newMessage})
-
 let initialState = {
     dialogsData : [
         {id:1, name: "Valera"},
@@ -20,13 +18,15 @@ let initialState = {
     ],
 }
 
+export const newMessageActionCreator = (newMessage) => ({type: `ADD-MESSAGE`, newMessage})
+
 const dialogsReducer = (state = initialState , action) => {
 
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messagesData: [...state.messagesData, {id : 6, message : action.newMessage}],
+                messagesData: [...state.messagesData, {id: 6, message: action.newMessage}],
             }
         default: return state
     }

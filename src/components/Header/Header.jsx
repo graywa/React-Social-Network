@@ -2,11 +2,15 @@ import React from "react"
 import classes from "./Header.module.css"
 import {NavLink} from "react-router-dom"
 import Preloader from "../common/Preloader/Preloader"
+import user__img from "../../img/users/user.png";
 
 const Header = (props) => {
 
   return <header className={classes.header}>
-    {props.userAva && <span><img className={classes.login__photo} src={props.userAva} alt=""/></span>}
+    <NavLink to={'/profile/'}>
+      {props.userAva && <span><img className={classes.user__ava} src={props.userAva} alt=""/></span>}
+    </NavLink>
+
     <div className={classes.auth__block}>
       {props.isAuth
         ? <div className={classes.login__container}>

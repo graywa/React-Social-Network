@@ -1,16 +1,29 @@
 .nav {
     padding: 10px;
+    min-height: 360px;
 
     grid-area: n;
     background-color: #6e4c61;
     color: #fcfffe;
 }
 
-.item a{
-    color: #fcfffe;
-    text-decoration: none;
+.item {
+  padding: 5px;
 }
 
-.item .activeLink {
-    color: #d4b8b8;
+.item a{
+    color: #ddd1dd;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s;
+}
+
+
+.item:hover a{
+    color: white;
+}
+
+.item a.activeLink {
+    color: #ffffff;
+    font-weight: bold;
 }

@@ -18,9 +18,15 @@
 .btn {
     font-size: 12px;
     margin: 0 5px;
+    background-color: #62445c;
 }
 
-.login__photo {
+.user__ava {
     max-height: 50px;
     margin: 5px;
+    transition: border .5s linear;
+}
+
+.user__ava:hover {
+    border: 1px #373737 solid;
 }

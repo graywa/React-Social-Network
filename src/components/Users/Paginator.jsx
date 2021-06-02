@@ -4,10 +4,8 @@ import classes from './Users.module.css'
 
 let Paginator = (props) => {
 
-  const portionSize = 20
-
   const pagesCount = Math.ceil(props.totalUsers / props.usersOnPage)
-  const portionCount = Math.ceil(pagesCount/portionSize)
+  const portionCount = Math.ceil(pagesCount/props.portionSize)
 
   let pages = []
 
@@ -15,9 +13,9 @@ let Paginator = (props) => {
     pages.push(i)
   }
 
-  let [portionNumber, setPortionNumber] = useState(Math.ceil(props.currentPage/portionSize))
-  const leftPage = portionSize * (portionNumber - 1) + 1
-  const rightPage = portionSize * portionNumber
+  let [portionNumber, setPortionNumber] = useState(Math.ceil(props.currentPage/props.portionSize))
+  const leftPage = props.portionSize * (portionNumber - 1) + 1
+  const rightPage = props.portionSize * portionNumber
 
   return(
     <div className={classes.selectorNumbers}>

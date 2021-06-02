@@ -1,5 +1,5 @@
 import {profileAPI} from "../API/api"
-import {stopSubmit} from "redux-form";
+import {stopSubmit} from "redux-form"
 
 const ADD_POST = 'ADD-POST',
   SET_PROFILE = 'SET_PROFILE',
@@ -26,16 +26,8 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
-      let newPost = {
-        id: 6,
-        message: action.newMessage,
-        likesCount: 0,
-      }
-      let copyState = {...state}
-      copyState.postsData = [...state.postsData]
-      copyState.postsData.push(newPost)
-      copyState.newPostText = ""
-      return copyState
+      return {...state, newPostText: '' ,
+        postsData: [...state.postsData, {id: 6, message: action.newMessage, likesCount: 0}]}
     }
     case SET_PROFILE: {
       return {...state, profile: action.profile}
@@ -140,4 +132,4 @@ export const saveProfile = (profile) => {
 }
 
 
-export default profileReducer;
+export default profileReducer

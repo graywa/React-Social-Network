@@ -3,10 +3,15 @@
     background-color: #ffe273;
 }
 
-.item {
-    color: #2f2f33;
+.post__item {
+    display: flex;
+    margin: 10px;
 }
 
-.item img {
+.post__item img {
     width: 50px;
+}
+
+.post__content {
+    margin-left: 10px;
 }

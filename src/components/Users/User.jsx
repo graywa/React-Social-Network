@@ -12,7 +12,7 @@ const User = (props) => {
           <NavLink to={'/profile/' + props.user.id}>
             <div>
               <img className={classes.user__img}
-                   src={props.user.photos.small != null ? props.user.photos.small : user__img} alt=""/>
+                   src={props.user.photos.small ? props.user.photos.small : user__img} alt=""/>
             </div>
           </NavLink>
           <div>
@@ -40,8 +40,8 @@ const User = (props) => {
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
   )
 }

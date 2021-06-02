@@ -1,4 +1,4 @@
-import React from 'react'
+
 import ReactDOM from "react-dom"
 import App from "./App"
 import store from './redux/redux-store'
@@ -11,7 +11,6 @@ ReactDOM.render(
       <App/>
     </Provider>
   </HashRouter>
-  ,
-  document.getElementById('root')
+  , document.getElementById('root')
 )
 
