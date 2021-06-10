@@ -5,6 +5,7 @@
     grid-area: n;
     background-color: #6e4c61;
     color: #fcfffe;
+    border-radius: 5px;
 }
 
 .item {

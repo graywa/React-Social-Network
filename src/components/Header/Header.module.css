@@ -1,6 +1,7 @@
 .header {
     grid-area: h;
     background-color: #6d4b60;
+    border-radius: 5px;
 }
 
 .auth__block {

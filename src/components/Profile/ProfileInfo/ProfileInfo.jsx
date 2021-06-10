@@ -34,7 +34,7 @@ const ProfileInfo = (props) => {
         <img className={classes.userPhoto} src={props.profile.photos.large || user__img}/>
         <div >
           {props.isOwner && <label className={classes.labelInput}><input
-            type="file" onChange={onSelectPhoto}/>Choose a photo</label>}
+            type="file" onChange={onSelectPhoto}/>choose a photo</label>}
         </div>
       </div>
       { editMode

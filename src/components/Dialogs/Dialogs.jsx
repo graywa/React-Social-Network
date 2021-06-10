@@ -47,7 +47,7 @@ const Dialogs = (props) => {
 
   return (
     <div className={classes.dialogs}>
-      <div>
+      <div className={classes.users}>
         {dialogsElements}
       </div>
 
