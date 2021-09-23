@@ -1,12 +1,12 @@
-import profileReducer, {addPostActionCreator, deletePost} from "./profileReducer";
+import profileReducer, {addPostActionCreator, deletePost} from './profileReducer'
 
 let state = {
   postsData: [
-    {id: 1, message: "Why is it so difficult?", likesCount: 221},
-    {id: 2, message: "I learn English sometimes", likesCount: 85},
-    {id: 3, message: "Good morning night city ", likesCount: 4},
-    {id: 4, message: "I played football every day ", likesCount: 33},
-    {id: 5, message: "I'm twenty-five ", likesCount: 15},
+    {id: 1, message: 'Why is it so difficult?', likesCount: 221},
+    {id: 2, message: 'I learn English sometimes', likesCount: 85},
+    {id: 3, message: 'Good morning night city ', likesCount: 4},
+    {id: 4, message: 'I played football every day ', likesCount: 33},
+    {id: 5, message: 'I\'m twenty-five ', likesCount: 15},
   ]
 }
 

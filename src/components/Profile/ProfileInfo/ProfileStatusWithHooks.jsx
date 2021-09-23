@@ -40,12 +40,18 @@ const ProfileStatusWithHooks = (props) => {
             onChange={onStatusChange}
           />
         </div>
-      :  <div onDoubleClick={onEditMode} >
+      : (props.isOwner && <div onDoubleClick={onEditMode} title='double click to change'>
           <span><b>Status:</b> {props.status}</span>
-        </div>
+        </div>)
+        || <div> <span><b>Status:</b> {props.status}</span></div>
       }
     </div>
   )
 }
 
 export default ProfileStatusWithHooks
+
+
+
+
+

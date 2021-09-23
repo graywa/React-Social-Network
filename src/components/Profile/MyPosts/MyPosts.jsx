@@ -41,7 +41,7 @@ const PostFormRedux = reduxForm({
 const MyPosts = (props) => {
 
   let postsElements = props.posts
-    .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>);
+    .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>)
 
   let onAddPost = (values) => {
     props.addPost(values.postArea)

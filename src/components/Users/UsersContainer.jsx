@@ -31,7 +31,6 @@ class UsersContainer extends React.Component  {
     }
 
     render () {
-
         return <>
             {this.props.isFetching
             ? <Preloader />
@@ -68,5 +67,5 @@ export default connect (mapStateToProps, {
     setCurrentPage,
     //setToggleFollow,
     getUsers,
-}) (UsersContainer);
+}) (UsersContainer)
 
