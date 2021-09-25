@@ -11,7 +11,7 @@ const FOLLOW = 'FOLLOW',
 
 type InitialStateType = typeof initialState
 
-type UserDataType = {
+export type UserDataType = {
   id: number
   name: string
   status: string

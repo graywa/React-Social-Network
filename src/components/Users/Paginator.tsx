@@ -1,8 +1,17 @@
 import React, {useState} from 'react'
 import classes from './Users.module.css'
 
+type PropsType = {
+  totalUsers: number
+  usersOnPage: number
+  portionSize: number
+  currentPage: number
 
-let Paginator = (props) => {
+  onPageChanged: (p: number) => void
+}
+
+
+let Paginator: React.FC<PropsType> = (props) => {
 
   const pagesCount = Math.ceil(props.totalUsers / props.usersOnPage)
   const portionCount = Math.ceil(pagesCount/props.portionSize)

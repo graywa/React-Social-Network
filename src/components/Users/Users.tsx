@@ -1,9 +1,21 @@
 import React from 'react'
 import User from "./User"
 import Paginator from "./Paginator"
+import {UserDataType} from "../../redux/usersReducer"
 
+type PropsType = {
+  usersOnPage: number
+  totalUsers: number
+  currentPage: number
+  usersData: Array<UserDataType>
+  followInProgress: Array<number>
 
-let Users = (props) => {
+  onPageChanged: (page: number) => void
+  follow: (userId: number) => void
+  unfollow: (userId: number) => void
+}
+
+let Users: React.FC<PropsType> = (props) => {
 
   const PaginatorWithProps = () => {
     return <Paginator usersOnPage={props.usersOnPage}
