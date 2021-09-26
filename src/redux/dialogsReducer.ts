@@ -4,7 +4,6 @@ type NewMessageActionType = {
     type: typeof ADD_MESSAGE
     newMessage: string
 }
-
 export const newMessageActionCreator = (newMessage: string): NewMessageActionType => ({type: `ADD-MESSAGE`, newMessage})
 
 type DialogDataType = {
@@ -40,7 +39,7 @@ let initialState: InitialStateType = {
 }
 
 
-const dialogsReducer = (state = initialState , action: any): InitialStateType => {
+const dialogsReducer = (state = initialState , action: NewMessageActionType): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE:
