@@ -1,8 +1,8 @@
 import {usersAPI} from "../API/api"
-import { PhotosType } from "../types/Types"
+import {UserDataType} from "../types/Types"
 import {AppStateType} from "./redux-store"
 import {Dispatch} from "redux"
-import {ThunkAction} from "redux-thunk";
+import {ThunkAction} from "redux-thunk"
 
 const FOLLOW = 'FOLLOW',
   UNFOLLOW = 'UNFOLLOW',
@@ -13,14 +13,6 @@ const FOLLOW = 'FOLLOW',
   SET_TOGGLE_FOLLOW = 'SET_TOGGLE_FOLLOW'
 
 type InitialStateType = typeof initialState
-
-export type UserDataType = {
-  id: number
-  name: string
-  status: string
-  photos: Array<PhotosType>
-  followed: boolean
-}
 
 let initialState = {
   usersData: [] as Array<UserDataType>,

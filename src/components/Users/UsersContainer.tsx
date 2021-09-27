@@ -5,7 +5,7 @@ import {
     setCurrentPage,
     unfollow,
     setToggleFollow,
-    getUsers, UserDataType
+    getUsers
 } from "../../redux/usersReducer"
 import Users from "./Users"
 import Preloader from "../common/Preloader/Preloader"
@@ -19,6 +19,7 @@ import {
     getUsersOnPage
 } from "../../redux/usersSelectors"
 import {AppStateType} from "../../redux/redux-store"
+import {UserDataType} from "../../types/Types"
 
 type OwnPropsType = {
 

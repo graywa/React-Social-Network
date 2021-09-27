@@ -1,8 +1,8 @@
 import {profileAPI} from "../API/api"
 import {stopSubmit} from "redux-form"
-import {PhotosType} from "../types/Types"
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
+import {PhotosType, ProfileType} from "../types/Types"
+import {ThunkAction} from "redux-thunk"
+import {AppStateType} from "./redux-store"
 
 const ADD_POST = 'ADD-POST',
   SET_PROFILE = 'SET_PROFILE',
@@ -15,26 +15,6 @@ type PostDataType = {
   id: number
   message: string
   likesCount: number
-}
-
-type ContactType = {
-  github: string
-  vk: string
-  facebook: string
-  instagram: string
-  twitter: string
-  website: string
-  youtube: string
-  mainLink: string
-}
-
-type ProfileType = {
-  userId: number
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-  fullName: string
-  contacts: ContactType
-  photos: PhotosType
 }
 
 let initialState = {
@@ -140,21 +120,22 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, any, ActionsTypes>
 export const getUserProfile = (userId: number | null): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.getProfile(userId)
-    dispatch(setProfile(response.data))
+    dispatch(setProfile(response))
   }
 }
 
 export const getUserAva = (userId: number): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.getProfile(userId)
-    dispatch(setUserAva(response.data))
+    dispatch(setUserAva(response))
   }
 }
 
 export const getUserStatus = (userId: number): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.getUserStatus(userId)
-    dispatch(setUserStatus(response.data))
+    // @ts-ignore
+    dispatch(setUserStatus(response))
   }
 }
 
@@ -184,6 +165,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => {
       dispatch(getUserProfile(userId))
     } else {
       let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+      // @ts-ignore
       dispatch(stopSubmit('editProfile', {_error: message}))
       return Promise.reject(message)
     }

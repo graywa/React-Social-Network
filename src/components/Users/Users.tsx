@@ -1,7 +1,8 @@
 import React from 'react'
 import User from "./User"
 import Paginator from "./Paginator"
-import {UserDataType} from "../../redux/usersReducer"
+import {UserDataType} from "../../types/Types"
+
 
 type PropsType = {
   usersOnPage: number

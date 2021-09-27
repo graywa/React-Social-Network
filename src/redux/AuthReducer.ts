@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from "../API/api"
+import {authAPI, ResultCodesEnum, ResultCodeWithCaptchaEnum, securityAPI} from "../API/api"
 import {stopSubmit} from "redux-form"
 import {setUserAva} from "./profileReducer"
 import {ThunkAction} from "redux-thunk"
@@ -29,6 +29,8 @@ const setAuthReducer = (state = initialState, action: ActionsTypes): InitialStat
   switch (action.type) {
     case AUTH__USER:
     case CAPTCHA__URL: {
+
+      // @ts-ignore
       return {...state, ...action.data}
     }
     default:
@@ -54,11 +56,11 @@ export const setAuthUser = (userId: number | null, email: string | null, login: 
 
 type SetCapthaUrlType = {
   type: typeof CAPTCHA__URL
-  data:  string
+  data:  {captchaUrl: string}
 }
 export const setCaptchaUrl = (captchaUrl:  string ): SetCapthaUrlType => ({
   type: 'CAPTCHA__URL',
-  data: captchaUrl
+  data: {captchaUrl}
 })
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, any, ActionsTypes>
@@ -76,11 +78,12 @@ export const getAuthUser = (): ThunkType => {
 export const login = (email: string, password:string, rememberMe: boolean, captcha: string): ThunkType => {
   return async (dispatch) => {
     const response = await authAPI.login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
       dispatch(getAuthUser())
     } else {
-      if(response.data.resultCode === 10) dispatch(getCaptchaUrl())
-      let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+      if(response.resultCode === ResultCodeWithCaptchaEnum.WithCaptcha) dispatch(getCaptchaUrl())
+      let message = response.messages.length > 0 ? response.messages[0] : 'Some error'
+      // @ts-ignore
       dispatch(stopSubmit('login', {_error: message}))
     }
   }
@@ -89,7 +92,7 @@ export const login = (email: string, password:string, rememberMe: boolean, captc
 export const getCaptchaUrl = (): ThunkType => {
   return async (dispatch) => {
     const response = await securityAPI.getCaptchaUrl()
-    const captchaUrl = response.data.url
+    const captchaUrl = response.url
     dispatch(setCaptchaUrl(captchaUrl))
   }
 }
@@ -97,8 +100,9 @@ export const getCaptchaUrl = (): ThunkType => {
 export const logout = (): ThunkType => {
   return async (dispatch) => {
     const response = await authAPI.logout()
-    if (!response.data.resultCode) {
+    if (!response.resultCode) {
       dispatch(setAuthUser(null, null, null, false))
+      // @ts-ignore
       dispatch(setUserAva(null))
     }
   }
