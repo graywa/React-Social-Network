@@ -1,14 +1,20 @@
-import {Field, reduxForm} from 'redux-form'
+import React from "react"
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {Element} from '../common/FormsControl/FormsControl'
 import {required} from '../utilities/validators'
 import {connect} from 'react-redux'
 import {login} from '../../redux/AuthReducer'
 import {Redirect} from 'react-router-dom'
 import styles from './../common/FormsControl/FormsControl.module.css'
+import {AppStateType} from "../../redux/redux-store"
 
 const Input = Element('input')
 
-const LoginForm = (props) => {
+type LoginFormOwnProps = {
+  captchaUrl: string | null
+}
+
+const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
 
   return (
     <form onSubmit={props.handleSubmit}>
@@ -38,13 +44,29 @@ const LoginForm = (props) => {
   )
 }
 
-const LoginFormRedux = reduxForm({
+const LoginFormRedux = reduxForm<LoginFormValuesType, LoginFormOwnProps>({
   form: 'login'
 }) (LoginForm)
 
-const Login = (props) => {
+type MapStatePropsType = {
+  isAuth: boolean
+  captchaUrl: string | null
+}
 
-  const onSubmit = ({email, password, rememberMe, captcha}) => {
+type MapDispatchPropsType = {
+  login: (email: string, password:string, rememberMe: boolean, captcha: string) => void
+}
+
+type LoginFormValuesType = {
+  email: string
+  password:string
+  rememberMe: boolean
+  captcha: string
+}
+
+const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
+
+  const onSubmit = ({email, password, rememberMe, captcha}: LoginFormValuesType) => {
     props.login(email, password, rememberMe, captcha)
   }
 
@@ -59,7 +81,7 @@ const Login = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     isAuth: state.authUser.isAuth,
     captchaUrl: state.authUser.captchaUrl
@@ -67,4 +89,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect ( mapStateToProps, {login} ) (Login)
+export default connect (mapStateToProps, {login})(Login)
