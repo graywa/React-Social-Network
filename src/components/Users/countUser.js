@@ -1,4 +1,4 @@
-import {usersAPI} from "../../API/api";
+import {usersAPI} from '../../API/users-api'
 
 
 let userWidthPhoto = 0

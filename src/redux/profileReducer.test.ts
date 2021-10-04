@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, deletePost} from './profileReducer'
+import profileReducer, {actionCreatorsProfile, } from './profileReducer'
 
 let state = {
   postsData: [
@@ -7,12 +7,16 @@ let state = {
     {id: 3, message: 'Good morning night city ', likesCount: 4},
     {id: 4, message: 'I played football every day ', likesCount: 33},
     {id: 5, message: 'I\'m twenty-five ', likesCount: 15},
-  ]
+  ],
+  newPostText: 'How are you?',
+  profile: null,
+  userAva: null,
+  status: ''
 }
 
 it('state should be incremented', () => {
   //1. Test data
-  let action = addPostActionCreator('Hello World')
+  let action = actionCreatorsProfile.addPostActionCreator('Hello World')
 
   //2. Action
   let newState = profileReducer(state, action)
@@ -24,7 +28,7 @@ it('state should be incremented', () => {
 it('new message should be correct', () => {
 
   //1. Test data
-  let action = addPostActionCreator('Hello World')
+  let action = actionCreatorsProfile.addPostActionCreator('Hello World')
 
   //2. Action
   let newState = profileReducer(state, action)
@@ -36,7 +40,7 @@ it('new message should be correct', () => {
 it('after delete post postsData should be decrement', () => {
 
   //1. Test data
-  let action = deletePost(1)
+  let action = actionCreatorsProfile.deletePost(1)
 
   //2. Action
   let newState = profileReducer(state, action)

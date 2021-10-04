@@ -9,7 +9,7 @@ import UsersContainer from './components/Users/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import LoginPage from './components/Login/Login'
 import { connect } from 'react-redux'
-import { initializeApp } from './redux/AppReducer'
+import { initializeApp } from './redux/appReducer'
 import Preloader from './components/common/Preloader/Preloader'
 import { withSuspense } from './components/HOC/withSuspense'
 

@@ -1,4 +1,4 @@
-import {addPostActionCreator} from "../../../redux/profileReducer"
+import {actionCreatorsProfile} from '../../../redux/profileReducer'
 import MyPosts from "./MyPosts"
 import {connect} from "react-redux"
 import {reset} from "redux-form"
@@ -12,7 +12,7 @@ let mapStateToProps = (state) => ({
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (postArea) => {
-      dispatch(addPostActionCreator(postArea))
+      dispatch(actionCreatorsProfile.addPostActionCreator(postArea))
       dispatch(reset('myPost'))
     }
   }

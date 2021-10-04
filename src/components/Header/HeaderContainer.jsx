@@ -1,15 +1,15 @@
-import React from "react"
-import Header from "./Header"
-import {logout, setAuthUser} from "../../redux/AuthReducer"
-import {connect} from "react-redux"
-import {getUserAva} from "../../redux/profileReducer";
+import React from 'react'
+import Header from './Header'
+import {actionCreators, logout} from '../../redux/authReducer'
+import {connect} from 'react-redux'
+import {getUserAva} from '../../redux/profileReducer'
 
 
 class HeaderContainer extends React.Component {
 
   refreshHeader() {
     let userId = this.props.userId
-    if(userId != null) this.props.getUserAva(userId)
+    if (userId != null) this.props.getUserAva(userId)
   }
 
   componentDidMount() {
@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.props.userId != prevProps.userId) {
+    if (this.props.userId !== prevProps.userId) {
       this.refreshHeader()
     }
   }
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => ({
   userAva: state.profilePage.userAva
 })
 
-export default connect(mapStateToProps, {setAuthUser, logout, getUserAva})(HeaderContainer)
+export default connect(mapStateToProps, {logout, getUserAva})(HeaderContainer)
