@@ -1,14 +1,10 @@
 import {stopSubmit} from 'redux-form'
-import {PhotosType, ProfileType} from '../types/Types'
+import {PhotosType, PostDataType, ProfileType} from '../types/Types'
 import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
 import {profileAPI} from '../API/profile-api'
 
 
-type PostDataType = {
-  id: number
-  message: string
-  likesCount: number
-}
+
 
 let initialState = {
   postsData: [

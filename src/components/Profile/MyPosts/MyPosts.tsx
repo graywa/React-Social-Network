@@ -1,15 +1,17 @@
-import classes from "./MyPosts.module.css"
-import Post from "./Post/Post"
-import {Field, reduxForm} from "redux-form"
-import {maxLengthCreator, required} from "../../utilities/validators"
-import {Element} from "../../common/FormsControl/FormsControl"
+import React from 'react'
+import classes from './MyPosts.module.css'
+import Post from './Post/Post'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {maxLengthCreator, required} from '../../utilities/validators'
+import {Element} from '../../common/FormsControl/FormsControl'
+import {PostDataType} from '../../../types/Types'
 
 const TextArea = Element('textarea')
-
 const maxLength50 = maxLengthCreator(50)
 
-const PostForm = (props) => {
+type MyPostsFormProps = {}
 
+const PostForm: React.FC<InjectedFormProps<MyPostsFormValuesType, MyPostsFormProps> & MyPostsFormProps> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={classes.newPost}>
@@ -28,22 +30,28 @@ const PostForm = (props) => {
           <button>Add post</button>
         </div>
       </div>
-
     </form>
   )
 }
 
-const PostFormRedux = reduxForm({
+const PostFormRedux = reduxForm<MyPostsFormValuesType, MyPostsFormProps>({
   form: 'myPost'
-}) (PostForm)
+})(PostForm)
 
+type MyPostsFormValuesType = {
+  posts: Array<PostDataType>
+  addPost: (postArea: string) => void
+}
+type AddPostFormType = {
+  postArea: string
+}
 
-const MyPosts = (props) => {
+const MyPosts: React.FC<MyPostsFormValuesType> = (props) => {
 
-  let postsElements = props.posts
+  const postsElements = props.posts
     .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>)
 
-  let onAddPost = (values) => {
+  const onAddPost = (values: AddPostFormType) => {
     props.addPost(values.postArea)
   }
 
@@ -51,9 +59,7 @@ const MyPosts = (props) => {
     <div className={classes.postsBlock}>
       <div className={classes.newPost__block}>
         <h3>My posts</h3>
-        <PostFormRedux
-          onSubmit={onAddPost}
-        />
+        <PostFormRedux onSubmit={onAddPost} />
       </div>
 
       <div className={classes.posts}>

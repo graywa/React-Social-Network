@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header'
-import {actionCreators, logout} from '../../redux/authReducer'
+import {logout} from '../../redux/authReducer'
 import {connect} from 'react-redux'
 import {getUserAva} from '../../redux/profileReducer'
 

@@ -3,7 +3,7 @@ export type PhotosType = {
     large: string | null
 }
 
-type ContactType = {
+export type ContactType = {
     github: string
     vk: string
     facebook: string
@@ -21,12 +21,19 @@ export type ProfileType = {
     fullName: string
     contacts: ContactType
     photos: PhotosType
+    aboutMe: string
 }
 
 export type UserDataType = {
     id: number
     name: string
     status: string
-    photos: Array<PhotosType>
+    photos: PhotosType
     followed: boolean
+}
+
+export type PostDataType = {
+    id: number
+    message: string
+    likesCount: number
 }

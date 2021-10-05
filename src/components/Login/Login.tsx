@@ -15,7 +15,6 @@ type LoginFormOwnProps = {
 }
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
-
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -77,7 +76,6 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
       <h1>Login</h1>
       <LoginFormRedux onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>
-
   )
 }
 

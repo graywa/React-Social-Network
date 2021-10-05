@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { initializeApp } from './redux/appReducer'
 import Preloader from './components/common/Preloader/Preloader'
 import { withSuspense } from './components/HOC/withSuspense'
+import {AppStateType} from './redux/redux-store'
 
 const ProfileContainer = React.lazy(() =>
   import('./components/Profile/ProfileContainer')
@@ -20,13 +21,21 @@ const DialogsContainer = React.lazy(() =>
   import('./components/Dialogs/DialogsContainer')
 )
 
-class App extends Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  initializeApp: () => void
+}
+
+const SuspendedDialogs = withSuspense(DialogsContainer)
+
+class App extends Component <MapPropsType & DispatchPropsType> {
   componentDidMount() {
     this.props.initializeApp()
   }
 
   render() {
     if (!this.props.initialized) return <Preloader />
+
 
     return (
       <div className="app-wrapper">
@@ -35,7 +44,7 @@ class App extends Component {
         <div className="app-wrapper-content">
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/profile" />} />
-            <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+            <Route path="/dialogs" render={() => <SuspendedDialogs/> }/>
             <Route
               path="/profile/:userId?"
               render={withSuspense(ProfileContainer)}
@@ -53,7 +62,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
 })
 

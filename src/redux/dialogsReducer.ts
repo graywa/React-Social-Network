@@ -2,10 +2,10 @@ import {InferActionsTypes} from './redux-store'
 
 
 export const actionCreators = {
-    newMessageActionCreator : (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
+    newMessageAC : (newMessage: string) => ({type: 'ADD-MESSAGE', newMessage} as const)
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 let initialState = {

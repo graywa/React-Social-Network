@@ -2,26 +2,42 @@ import React from 'react'
 import Profile from './Profile'
 import {connect} from 'react-redux'
 import {getUserProfile, getUserStatus, savePhoto, updateUserStatus, saveProfile} from '../../redux/profileReducer'
-import {Redirect, withRouter} from 'react-router-dom'
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom'
 import {withAuthRedirect} from '../HOC/withAuthRedirect'
 import {compose} from 'redux'
+import {AppStateType} from '../../redux/redux-store'
+import {ProfileType} from '../../types/Types'
 
 
-class ProfileContainer extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  getUserProfile: (userId: number) => void
+  getUserStatus: (userId: number) => void
+  savePhoto: (file: File) => void
+  saveProfile: (profile: ProfileType) => Promise<any>
+  updateUserStatus: (status: string) => void
+}
+type PathParamsType = {
+  userId: string
+}
+
+type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathParamsType>
+
+class ProfileContainer extends React.Component<PropsType> {
 
   refreshProfile () {
-    let userId = this.props.match.params.userId
+    let userId: number | null = +this.props.match.params.userId
     if (!userId) userId = this.props.userId
     if (!userId)  this.props.history.push('/login')
-    this.props.getUserProfile(userId)
-    this.props.getUserStatus(userId)
+    this.props.getUserProfile(userId as number)
+    this.props.getUserStatus(userId as number)
   }
 
   componentDidMount() {
     this.refreshProfile()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: PropsType) {
     if(this.props.match.params.userId !== prevProps.match.params.userId) {
       this.refreshProfile()
     }
@@ -34,7 +50,7 @@ class ProfileContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
   userId: state.authUser.userId,
