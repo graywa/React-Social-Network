@@ -10,7 +10,7 @@ import {ContactType, ProfileType} from '../../../types/Types'
 
 
 type PropsType = {
-  profile: ProfileType
+  profile: ProfileType | null
   isOwner: boolean
   status: string
   savePhoto: (file: File) => void

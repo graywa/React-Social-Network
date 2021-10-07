@@ -6,7 +6,6 @@ type PropsType = {
   usersOnPage: number
   portionSize: number
   currentPage: number
-
   onPageChanged: (p: number) => void
 }
 

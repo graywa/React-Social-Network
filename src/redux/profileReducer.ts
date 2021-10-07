@@ -4,8 +4,6 @@ import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
 import {profileAPI} from '../API/profile-api'
 
 
-
-
 let initialState = {
   postsData: [
     {id: 1, message: 'Why is it so difficult?', likesCount: 221},
@@ -14,9 +12,8 @@ let initialState = {
     {id: 4, message: 'I played football every day ', likesCount: 33},
     {id: 5, message: 'I\'m twenty_five ', likesCount: 15},
   ] as Array<PostDataType>,
-  newPostText: 'How are you?',
   profile: null as ProfileType | null,
-  userAva: null as any,
+  userAva: null as string | null,
   status: ''
 }
 
@@ -28,7 +25,7 @@ const profileReducer = (state = initialState, action: ActionsTypes): InitialStat
   switch (action.type) {
     case 'ADD_POST': {
       return {
-        ...state, newPostText: '',
+        ...state,
         postsData: [...state.postsData, {id: 6, message: action.newMessage, likesCount: 0}]
       }
     }

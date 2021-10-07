@@ -11,7 +11,7 @@ const maxLength50 = maxLengthCreator(50)
 
 type MyPostsFormProps = {}
 
-const PostForm: React.FC<InjectedFormProps<MyPostsFormValuesType, MyPostsFormProps> & MyPostsFormProps> = (props) => {
+const PostForm: React.FC<InjectedFormProps<MapPropsFormType & DispatchPropsFormType, MyPostsFormProps> & MyPostsFormProps> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className={classes.newPost}>
@@ -34,19 +34,21 @@ const PostForm: React.FC<InjectedFormProps<MyPostsFormValuesType, MyPostsFormPro
   )
 }
 
-const PostFormRedux = reduxForm<MyPostsFormValuesType, MyPostsFormProps>({
+const PostFormRedux = reduxForm<MapPropsFormType & DispatchPropsFormType, MyPostsFormProps>({
   form: 'myPost'
 })(PostForm)
 
-type MyPostsFormValuesType = {
+export type MapPropsFormType = {
   posts: Array<PostDataType>
+}
+export type DispatchPropsFormType = {
   addPost: (postArea: string) => void
 }
 type AddPostFormType = {
   postArea: string
 }
 
-const MyPosts: React.FC<MyPostsFormValuesType> = (props) => {
+const MyPosts: React.FC<MapPropsFormType & DispatchPropsFormType> = (props) => {
 
   const postsElements = props.posts
     .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id}/>)

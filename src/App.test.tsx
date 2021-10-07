@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import {Provider} from "react-redux";
-import store from "./redux/redux-store";
-import {HashRouter} from "react-router-dom";
+import {Provider} from 'react-redux'
+import store from './redux/redux-store'
+import {HashRouter} from 'react-router-dom'
 
 /*test('renders learn react link', () => {
     render(<HashRouter>
@@ -16,14 +16,15 @@ import {HashRouter} from "react-router-dom";
     expect(linkElement).toBeInTheDocument()
 })*/
 
-it('renders without crashing',  () => {
-  const div = document.createElement('div');
+it('renders without crashing', () => {
+  const div = document.createElement('div')
   ReactDOM.render(<HashRouter>
     <Provider store={store}>
-      <App/>
+      <App />
     </Provider>
-  </HashRouter> , div)
-  ReactDOM.unmountComponentAtNode(div)
+  </HashRouter>
+, div)
+ReactDOM.unmountComponentAtNode(div)
 })
 
 

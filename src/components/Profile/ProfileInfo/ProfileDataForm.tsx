@@ -1,8 +1,8 @@
-import classes from "./ProfileInfo.module.css"
-import {Element} from "../../common/FormsControl/FormsControl"
+import classes from './ProfileInfo.module.css'
+import {Element} from '../../common/FormsControl/FormsControl'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
-import {required} from "../../utilities/validators"
-import styles from "../../common/FormsControl/FormsControl.module.css"
+import {required} from '../../utilities/validators'
+import styles from '../../common/FormsControl/FormsControl.module.css'
 import {ProfileType} from '../../../types/Types'
 
 const Input = Element('input')
@@ -29,21 +29,21 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
       </span>
     </div>
     <div>
-       <div className={classes.contacts}>
+      <div className={classes.contacts}>
         <b>Contacts:</b>
         {
           Object.keys(props.profile.contacts).map(key => {
-          let name = 'contacts.' + key
-          return <div key={key}>{key}:
-            <Field name = {name}  component={Input} />
-          </div>
+            let name = 'contacts.' + key
+            return <div key={key}>{key}:
+              <Field name={name} component={Input}/>
+            </div>
           })
         }
       </div>
       <div>
         <b>Looking for a job?</b>
         <span>
-          <Field name='lookingForAJob' component={Input} type='checkbox' />
+          <Field name='lookingForAJob' component={Input} type='checkbox'/>
         </span>
       </div>
       <div>
@@ -53,7 +53,7 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
         </span>
       </div>
       <div>
-        { props.error && <span className={styles.sumError}>{props.error}</span> }
+        {props.error && <span className={styles.sumError}>{props.error}</span>}
       </div>
       <div className={styles.btn}>
         <button>save</button>
@@ -65,6 +65,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
 
 const ProfileDataFormRedux = reduxForm<ProfileType, PropsType>({
   form: 'editProfile'
-}) (ProfileDataForm)
+})(ProfileDataForm)
 
 export default ProfileDataFormRedux

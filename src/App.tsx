@@ -1,4 +1,4 @@
-import './App.css'
+﻿import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Music from './components/Music/Music'
 import News from './components/News/News'
@@ -14,19 +14,14 @@ import Preloader from './components/common/Preloader/Preloader'
 import { withSuspense } from './components/HOC/withSuspense'
 import {AppStateType} from './redux/redux-store'
 
-const ProfileContainer = React.lazy(() =>
-  import('./components/Profile/ProfileContainer')
-)
-const DialogsContainer = React.lazy(() =>
-  import('./components/Dialogs/DialogsContainer')
-)
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
-type DispatchPropsType = {
-  initializeApp: () => void
-}
+type DispatchPropsType = {initializeApp: () => void}
 
 const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
 
 class App extends Component <MapPropsType & DispatchPropsType> {
   componentDidMount() {
@@ -44,10 +39,8 @@ class App extends Component <MapPropsType & DispatchPropsType> {
         <div className="app-wrapper-content">
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/profile" />} />
-            <Route path="/dialogs" render={() => <SuspendedDialogs/> }/>
-            <Route
-              path="/profile/:userId?"
-              render={withSuspense(ProfileContainer)}
+            <Route path="/dialogs" render={() => <SuspendedDialogs /> }/>
+            <Route path="/profile/:userId?" render={() => <SuspendedProfile />}
             />
             <Route path="/users" render={() => <UsersContainer />} />
             <Route path="/login" render={() => <LoginPage />} />

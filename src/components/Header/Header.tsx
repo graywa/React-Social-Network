@@ -1,10 +1,17 @@
-import React from "react"
-import classes from "./Header.module.css"
-import {NavLink} from "react-router-dom"
-import Preloader from "../common/Preloader/Preloader"
-import user__img from "../../img/users/user.png"
+import React from 'react'
+import classes from './Header.module.css'
+import {NavLink} from 'react-router-dom'
 
-const Header = (props) => {
+type MapPropsType = {
+  userAva: string
+  isAuth: boolean
+  login: string | null
+}
+type DispatchPropsType = {
+  logout: () => void
+}
+
+const Header:React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
   return <header className={classes.header}>
     <NavLink to={'/profile/'}>
