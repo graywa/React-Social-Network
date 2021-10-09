@@ -1,12 +1,12 @@
 import React from 'react'
 import {create} from 'react-test-renderer'
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatus from "./ProfileStatus"
 
 
 describe("ProfileStatus component", () => {
   test("Status from props should be in the state", () => {
     const component = create(<ProfileStatus status='hakuna matata' />)
-    const instance = component.getInstance()
+    const instance = component.getInstance()!
     expect(instance.state.status).toBe('hakuna matata')
   })
   test("After creation span should be displayed correct status", () => {

@@ -3,7 +3,7 @@ import classes from './Header.module.css'
 import {NavLink} from 'react-router-dom'
 
 type MapPropsType = {
-  userAva: string
+  userAva: string | null
   isAuth: boolean
   login: string | null
 }

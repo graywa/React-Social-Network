@@ -1,6 +1,5 @@
 import {getAuthUser} from './authReducer'
-import {ThunkAction} from 'redux-thunk'
-import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
+import {BaseThunkType, InferActionsTypes} from './redux-store'
 
 
 let initialState = {
@@ -27,7 +26,7 @@ export const actionCreators = {
   setInitialized : () => ({type: 'SET__INITIALIZED'} as const)
 }
 
-export const initializeApp = (): ThunkType => async (dispatch: any) => {
+export const initializeApp = (): ThunkType => async (dispatch) => {
   await dispatch(getAuthUser())
   dispatch(actionCreators.setInitialized())
 }

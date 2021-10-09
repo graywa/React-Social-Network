@@ -3,7 +3,7 @@ import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
 import {usersAPI} from '../API/users-api'
 
 
-let initialState = {
+const initialState = {
   usersData: [] as Array<UserDataType>,
   usersOnPage: 20,
   totalUsers: 0,
@@ -12,7 +12,7 @@ let initialState = {
   followInProgress: [] as Array<number>,
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actionCreators>
 type ThunkType = BaseThunkType<ActionsTypes>
 

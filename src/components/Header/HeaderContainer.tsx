@@ -30,7 +30,7 @@ class HeaderContainer extends React.Component<PropsType> {
 
 type MapPropsType = {
   userId: number | null
-  userAva: string
+  userAva: string | null
   isAuth: boolean
   login: string | null
 }

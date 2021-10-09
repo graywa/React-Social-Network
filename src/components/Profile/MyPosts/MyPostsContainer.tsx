@@ -1,5 +1,5 @@
 import {actionCreatorsProfile} from '../../../redux/profileReducer'
-import MyPosts, {DispatchPropsFormType, MapPropsFormType} from './MyPosts'
+import MyPosts, {DispatchPropsType, MapPropsType} from './MyPosts'
 import {connect} from 'react-redux'
 import {reset} from 'redux-form'
 import {AppStateType} from '../../../redux/redux-store'
@@ -18,7 +18,7 @@ let mapStateToProps = (state: AppStateType) => ({
 //   }
 // }
 
-const MyPostsContainer = connect<MapPropsFormType, DispatchPropsFormType, {}, AppStateType>(mapStateToProps, {
+const MyPostsContainer = connect<MapPropsType, DispatchPropsType, {}, AppStateType>(mapStateToProps, {
   addPost: actionCreatorsProfile.addPostActionCreator
 })(MyPosts)
 

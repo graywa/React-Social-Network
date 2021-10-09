@@ -86,5 +86,4 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   }
 }
 
-
 export default connect(mapStateToProps, {login})(Login)
