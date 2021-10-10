@@ -1,18 +1,23 @@
 import {UserDataType} from '../types/Types'
-import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
+import {BaseThunkType, InferActionsTypes} from './redux-store'
 import {usersAPI} from '../API/users-api'
 
 
 const initialState = {
   usersData: [] as Array<UserDataType>,
-  usersOnPage: 20,
+  usersOnPage: 30,
   totalUsers: 0,
   currentPage: 1,
   isFetching: false,
   followInProgress: [] as Array<number>,
+  filter: {
+    term: '',
+    friend: null as null | boolean
+  }
 }
 
 export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
 type ActionsTypes = InferActionsTypes<typeof actionCreators>
 type ThunkType = BaseThunkType<ActionsTypes>
 
@@ -58,6 +63,11 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
         ...state,
         isFetching: action.isFetching
       }
+    case 'SET_FILTER' :
+      return {
+        ...state,
+        filter: action.payload.filter
+      }
     case 'SET_TOGGLE_FOLLOW':
       return {
         ...state,
@@ -76,16 +86,18 @@ export const actionCreators = {
   setUsers: (users: Array<UserDataType>) => ({type: 'SET_USERS', users} as const),
   setCurrentPage: (page: number) => ({type: 'SET_CURRENT_PAGE', page} as const),
   setTotalUsers: (usersCount: number) => ({type: 'SET_TOTAL_USERS', usersCount} as const),
+  setFilter: (filter: FilterType) => ({type: 'SET_FILTER', payload: {filter}} as const),
   setToggle: (isFetching: boolean) => ({type: 'SET_TOGGLE', isFetching} as const),
   setToggleFollow: (isFetching: boolean, userId: number) => ({type: 'SET_TOGGLE_FOLLOW', isFetching, userId} as const)
 }
 
 
-export const getUsers = (page: number, usersOnPage: number): ThunkType => {
+export const getUsers = (page: number, usersOnPage: number, filter: FilterType): ThunkType => {
   return async (dispatch) => {
     dispatch(actionCreators.setToggle(true))
     dispatch(actionCreators.setCurrentPage(page))
-    const data = await usersAPI.getUsers(page, usersOnPage)
+    dispatch(actionCreators.setFilter(filter))
+    const data = await usersAPI.getUsers(page, usersOnPage, filter.term, filter.friend)
     dispatch(actionCreators.setUsers(data.items))
     dispatch(actionCreators.setTotalUsers(data.totalCount))
     dispatch(actionCreators.setToggle(false))

@@ -1,5 +1,9 @@
 import {AppStateType} from "./redux-store"
 
+export const getUsersFilter = (state: AppStateType) => {
+  return state.usersPage.filter
+}
+
 export const getUsersData = (state: AppStateType) => {
   return state.usersPage.usersData
 }

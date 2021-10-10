@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {
   follow,
   unfollow,
-  getUsers
+  getUsers,
+  FilterType
 } from '../../redux/usersReducer'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
@@ -14,6 +15,7 @@ import {
   getIsFetching,
   getTotalUsers,
   getUsersData,
+  getUsersFilter,
   getUsersOnPage
 } from '../../redux/usersSelectors'
 import {AppStateType} from '../../redux/redux-store'
@@ -21,6 +23,7 @@ import {UserDataType} from '../../types/Types'
 
 
 type MapStatePropsType = {
+  filter: FilterType
   usersOnPage: number
   totalUsers: number
   currentPage: number
@@ -33,7 +36,7 @@ type DispatchPropsType = {
   //onPageChanged: (page: number) => void
   follow: (userId: number) => void
   unfollow: (userId: number) => void
-  getUsers: (currentPage: number, usersOnPage: number) => void
+  getUsers: (currentPage: number, usersOnPage: number, filter: FilterType) => void
 }
 
 type PropsType = MapStatePropsType & DispatchPropsType
@@ -41,11 +44,15 @@ type PropsType = MapStatePropsType & DispatchPropsType
 class UsersContainer extends React.Component<PropsType> {
 
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.usersOnPage)
+    this.props.getUsers(this.props.currentPage, this.props.usersOnPage, this.props.filter)
   }
 
   onPageChanged = (page: number) => {
-    this.props.getUsers(page, this.props.usersOnPage)
+    this.props.getUsers(page, this.props.usersOnPage, this.props.filter)
+  }
+
+  onFilterChanged = (filter: FilterType) => {
+    this.props.getUsers(1, this.props.usersOnPage, filter)
   }
 
   render() {
@@ -54,6 +61,7 @@ class UsersContainer extends React.Component<PropsType> {
         ? <Preloader />
         : <Users
             currentPage={this.props.currentPage}
+            onFilterChanged={this.onFilterChanged}
             onPageChanged={this.onPageChanged}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
@@ -69,6 +77,7 @@ class UsersContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
+    filter: getUsersFilter(state),
     usersData: getUsersData(state),
     usersOnPage: getUsersOnPage(state),
     totalUsers: getTotalUsers(state),
