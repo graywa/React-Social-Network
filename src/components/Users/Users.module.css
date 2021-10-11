@@ -54,11 +54,11 @@
 
 .selectorNumbers {
     text-align: center;
-    padding: 20px 0 10px;
+    margin: 20px 0;
 }
 
 .selectedPage {
-    font-size: 14px;
+    font-size: 18px;
     padding: 0 3px;
     font-weight: bold;
 }
@@ -68,8 +68,9 @@
 }
 
 .unselectedPage {
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 3px;
+    margin: 0 3px;
 }
 
 .unselectedPage:hover {

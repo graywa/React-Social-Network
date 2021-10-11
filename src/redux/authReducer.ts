@@ -1,8 +1,7 @@
 import {ResultCodesEnum, ResultCodeWithCaptchaEnum} from '../API/api'
 import {stopSubmit} from 'redux-form'
 import {actionCreatorsProfile} from './profileReducer'
-import {ThunkAction} from 'redux-thunk'
-import {AppStateType, BaseThunkType, InferActionsTypes} from './redux-store'
+import {BaseThunkType, InferActionsTypes} from './redux-store'
 import {authAPI} from '../API/auth-api'
 import {securityAPI} from '../API/security-api'
 

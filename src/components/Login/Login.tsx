@@ -2,7 +2,7 @@ import React from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {Element} from '../common/FormsControl/FormsControl'
 import {required} from '../utilities/validators'
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {login} from '../../redux/authReducer'
 import {Redirect} from 'react-router-dom'
 import styles from './../common/FormsControl/FormsControl.module.css'
@@ -47,15 +47,6 @@ const LoginFormRedux = reduxForm<LoginFormValuesType, LoginFormOwnProps>({
   form: 'login'
 })(LoginForm)
 
-type MapStatePropsType = {
-  isAuth: boolean
-  captchaUrl: string | null
-}
-
-type DispatchPropsType = {
-  login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
-
 type LoginFormValuesType = {
   email: string
   password: string
@@ -63,27 +54,23 @@ type LoginFormValuesType = {
   captcha: string
 }
 
-const Login: React.FC<MapStatePropsType & DispatchPropsType> = (props) => {
+export const LoginPage: React.FC = (props) => {
+
+  const captchaUrl = useSelector((state: AppStateType) => state.authUser.captchaUrl)
+  const isAuth = useSelector((state: AppStateType) => state.authUser.isAuth)
+
+  const dispatch = useDispatch()
 
   const onSubmit = ({email, password, rememberMe, captcha}: LoginFormValuesType) => {
-    props.login(email, password, rememberMe, captcha)
+    dispatch(login(email, password, rememberMe, captcha))
   }
 
-  if (props.isAuth) return <Redirect to={'/profile'}/>
+  if (isAuth) return <Redirect to={'/profile'}/>
 
   return (
     <div className={styles.login}>
       <h1>Login</h1>
-      <LoginFormRedux onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+      <LoginFormRedux onSubmit={onSubmit} captchaUrl={captchaUrl}/>
     </div>
   )
 }
-
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-  return {
-    isAuth: state.authUser.isAuth,
-    captchaUrl: state.authUser.captchaUrl
-  }
-}
-
-export default connect(mapStateToProps, {login})(Login)

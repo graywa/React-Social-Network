@@ -5,9 +5,9 @@ import News from './components/News/News'
 import Settings from './components/Settings/Settings'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import React, {Component} from 'react'
-import UsersContainer from './components/Users/UsersContainer'
+import { UsersPage } from './components/Users/UsersPage'
 import HeaderContainer from './components/Header/HeaderContainer'
-import LoginPage from './components/Login/Login'
+import {LoginPage} from './components/Login/Login'
 import {connect} from 'react-redux'
 import {initializeApp} from './redux/appReducer'
 import Preloader from './components/common/Preloader/Preloader'
@@ -42,7 +42,7 @@ class App extends Component <MapPropsType & DispatchPropsType> {
             <Route path="/dialogs" render={() => <SuspendedDialogs/>}/>
             <Route path="/profile/:userId?" render={() => <SuspendedProfile/>}
             />
-            <Route path="/users" render={() => <UsersContainer/>}/>
+            <Route path="/users" render={() => <UsersPage/>}/>
             <Route path="/login" render={() => <LoginPage/>}/>
             <Route path="/music" component={Music}/>
             <Route path="/news" component={News}/>
