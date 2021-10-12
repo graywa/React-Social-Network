@@ -9,10 +9,12 @@ export const UsersPage:React.FC = React.memo((props) => {
   
   const isFetching = useSelector(getIsFetching)
 
-  return <>
-  {isFetching ? <Preloader /> : null}
-  <Users />    
-</>
+  return (
+  <>
+    {isFetching ? <Preloader /> : null}
+    <Users />    
+  </>
+)
 })
 
 
