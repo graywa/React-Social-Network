@@ -16,12 +16,14 @@ import {AppStateType} from './redux/redux-store'
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ChatPage = React.lazy(() => import('./components/Chat/ChatPage'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = { initializeApp: () => void }
 
 const SuspendedDialogs = withSuspense(DialogsContainer)
 const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 class App extends Component <MapPropsType & DispatchPropsType> {
   componentDidMount() {
@@ -29,7 +31,7 @@ class App extends Component <MapPropsType & DispatchPropsType> {
   }
 
   render() {
-    if (!this.props.initialized) return <Preloader/>
+    if (!this.props.initialized) return <Preloader />
 
 
     return (
@@ -38,16 +40,16 @@ class App extends Component <MapPropsType & DispatchPropsType> {
         <Navbar/>
         <div className="app-wrapper-content">
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/profile"/>}/>
-            <Route path="/dialogs" render={() => <SuspendedDialogs/>}/>
-            <Route path="/profile/:userId?" render={() => <SuspendedProfile/>}
-            />
-            <Route path="/users" render={() => <UsersPage/>}/>
-            <Route path="/login" render={() => <LoginPage/>}/>
-            <Route path="/music" component={Music}/>
-            <Route path="/news" component={News}/>
-            <Route path="/settings" component={Settings}/>
-            <Route path="*" render={() => <div>404 page not found</div>}/>
+            <Route exact path="/" render={() => <Redirect to="/profile"/>} />
+            <Route path="/dialogs" render={() => <SuspendedDialogs/>} />
+            <Route path="/profile/:userId?" render={() => <SuspendedProfile/>} />
+            <Route path="/chat" render={() => <SuspendedChatPage/>} />
+            <Route path="/users" render={() => <UsersPage/>} />
+            <Route path="/login" render={() => <LoginPage/>} />
+            <Route path="/music" component={Music} />
+            <Route path="/news" component={News} />
+            <Route path="/settings" component={Settings} />
+            <Route path="*" render={() => <div>404 page not found</div>} />
           </Switch>
         </div>
       </div>

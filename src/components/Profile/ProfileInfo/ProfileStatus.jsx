@@ -47,9 +47,7 @@ class ProfileStatus extends React.Component {
             />
           </div>
         ) : (
-          <div onDoubleClick={this.onEdit}>
-            <span>{`Статус: ${this.props.status}`}</span>
-          </div>
+          <span onDoubleClick={this.onEdit}>{`Статус: ${this.props.status}`}</span>
         )}
       </div>
     )

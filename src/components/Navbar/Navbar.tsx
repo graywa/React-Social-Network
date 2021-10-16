@@ -5,6 +5,9 @@ import {NavLink} from 'react-router-dom'
 const Navbar:React.FC = () => {
   return <nav className={classes.nav}>
     <div className={classes.item}>
+      <NavLink to="/chat" activeClassName={classes.activeLink}>Chat</NavLink>
+    </div>
+    <div className={classes.item}>
       <NavLink to="/dialogs" activeClassName={classes.activeLink}>Messages</NavLink>
     </div>
     <div className={classes.item}>

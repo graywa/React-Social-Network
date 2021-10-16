@@ -31,7 +31,6 @@ export const Users: React.FC = React.memo((props) => {
   const history = useHistory()
 
   useEffect(() => {
-    debugger
     const URLParams = new URLSearchParams(history.location.search)
     let actualPage = currentPage
     let actualFilter = filter
@@ -54,7 +53,6 @@ export const Users: React.FC = React.memo((props) => {
   }, [])
 
   useEffect(() => {
-    debugger
     history.push({
       pathname: '/users',
       search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`,
