@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { MessageType } from "../../API/chat-api"
+import { MessageTypeAPI } from "../../API/chat-api"
 import { getMessages, sendMessage, stopGetMessages } from "../../redux/chatReducer"
 import { AppStateType } from "../../redux/redux-store"
 
@@ -13,9 +13,9 @@ const ChatPage: React.FC = (props) => {
   )
 }
 
-const Chat: React.FC = (props) => {  
-
+const Chat: React.FC = (props) => {
   const dispatch = useDispatch()
+  const status = useSelector((state: AppStateType) => state.chat.status)
 
   useEffect (() => {
     dispatch(getMessages())
@@ -24,25 +24,42 @@ const Chat: React.FC = (props) => {
     }
   }, [])
 
-  return (
+  return (    
     <div style={{margin: '15px'}}>
+      {status === 'error' && <h2>Some error. Please refresh page</h2>}       
       <Messages />
-      <AddMessageForm />
+      <AddMessageForm />          
     </div>    
   )
 }
 
 const Messages: React.FC = () => {
   const messages = useSelector((state: AppStateType) => state.chat.messages)
+  const messagesAnchorRef = useRef<HTMLDivElement>(null)
+  const [isAutoScroll, setIsAutoScroll] = useState(true)
+
+  useEffect (() => { 
+    if(isAutoScroll) messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})    
+  }, [messages])
+
+  const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const element = e.currentTarget
+    if (element.scrollHeight - element.scrollTop - 200 <= element.clientHeight) {      
+      setIsAutoScroll(true)
+    } else setIsAutoScroll(false)       
+  }
 
   return (
-    <div style={{margin: '0 0 25px', height: '400px', overflow: 'auto'}}>
-      { messages.map((m: MessageType, index) => <Message message={m} key={index} />) }    
+    <div style={{margin: '0 0 25px', height: '400px', overflow: 'auto'}} onScroll={scrollHandler}>
+      { messages.map((m, index) => <Message message={m} key={m.id} />) } 
+      <div ref={messagesAnchorRef}></div>   
     </div>    
   )
 }
 
-const Message: React.FC<{message: MessageType}> = ({message}) => {
+const Message: React.FC<{message: MessageTypeAPI}> = React.memo(({message}) => {
+  console.log('message render');
+  
   return (
     <div>
       <img src={message.photo} alt="avatar" style={{width: '50px'}}/> 
@@ -54,13 +71,14 @@ const Message: React.FC<{message: MessageType}> = ({message}) => {
       <hr />
     </div>    
   )
-}
+})
 
 const AddMessageForm: React.FC = () => {
 
   const [message, setMessage] = useState('')
 
   const dispatch = useDispatch()
+  const status = useSelector((state: AppStateType) => state.chat.status)
   
   const sendMessageHandler = () => {
     if (!message) return
@@ -74,7 +92,7 @@ const AddMessageForm: React.FC = () => {
        style={{resize:'none'}}>{message}
       </textarea>
       <div>
-        <button disabled={false} onClick={sendMessageHandler}>Send</button>
+        <button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
       </div>
     </div>    
   )

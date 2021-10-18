@@ -4,6 +4,7 @@ import usersReducer, { actionCreators, InitialStateType } from "./usersReducer"
 let state: InitialStateType
 
 beforeEach(() => {
+  // @ts-ignore
   state = {
     usersData: [
       {id: 0, name: 'Vlad0', status: 'status0', photos: {large: null, small: null}, followed: false},

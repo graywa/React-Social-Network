@@ -37,6 +37,10 @@ button:hover {
     cursor: pointer;
     background-color: #86657d;
 }
+button:disabled {
+    cursor: not-allowed;
+    background-color: #a07e97;
+}
 
 
 
