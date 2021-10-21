@@ -10,11 +10,9 @@ import React from 'react'
 const TextArea = Element('textarea')
 const maxLength14 = maxLengthCreator(14)
 
-type DialogsFormOwnPropsType = {}
-
-const MessageForm: React.FC<InjectedFormProps<NewMessageFormType, DialogsFormOwnPropsType> & DialogsFormOwnPropsType> = (props) => {
+const MessageForm: React.FC<InjectedFormProps<NewMessageFormType>> = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form className={classes.form} onSubmit={props.handleSubmit}>
       <div>
         <Field
           name='newMessage'
@@ -30,7 +28,7 @@ const MessageForm: React.FC<InjectedFormProps<NewMessageFormType, DialogsFormOwn
   )
 }
 
-const MessageFormRedux = reduxForm<NewMessageFormType, DialogsFormOwnPropsType>({
+const MessageFormRedux = reduxForm<NewMessageFormType>({
   form: 'message'
 })(MessageForm)
 
@@ -39,18 +37,21 @@ type NewMessageFormType = {
 }
 type OwnPropsType = {
   dialogsPage: InitialStateType
-  sendMessage: (message: string) => void
+  newMessageAC: (message: string) => void
 }
 
 const Dialogs: React.FC<OwnPropsType> = (props) => {
 
   let state = props.dialogsPage
+
   let dialogsElements = state.dialogsData
     .map(dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>)
+
   let messagesElements = state.messagesData
     .map(message => <Message message={message.message} key={message.id}/>)
+
   let onSendMessage = (values: NewMessageFormType) => {
-    props.sendMessage(values.newMessage)
+    props.newMessageAC(values.newMessage)
   }
 
   return (
@@ -59,15 +60,13 @@ const Dialogs: React.FC<OwnPropsType> = (props) => {
         {dialogsElements}
       </div>
 
-      <div className={classes.messages}>
-        <div>
+      <div className={classes.messages__block}>
+        <div className={classes.messages}>
           {messagesElements}
-        </div>
-        <div className={classes.newMessage}>
-          <MessageFormRedux onSubmit={onSendMessage}
-          />
-        </div>
+        </div>         
+        <MessageFormRedux onSubmit={onSendMessage}/>           
       </div>
+      
     </div>
   )
 }

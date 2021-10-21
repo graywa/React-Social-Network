@@ -40,7 +40,6 @@ type DispatchPropsType = {
 }
 type PropsType = MapPropsType & DispatchPropsType
 
-
 const mapStateToProps = (state: AppStateType) => ({
   userId: state.authUser.userId,
   isAuth: state.authUser.isAuth,

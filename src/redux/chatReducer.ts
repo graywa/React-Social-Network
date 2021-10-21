@@ -10,7 +10,7 @@ type ActionsTypes = InferActionsTypes<typeof actionCreators>
 type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>
 export type MessageType = MessageTypeAPI & {id: string}
 
-let initialState = {
+const initialState = {
   messages: [] as MessageType[],
   status: 'ready' as StatusType  
 }
@@ -28,20 +28,29 @@ const chatReducer = (state = initialState, action: ActionsTypes): InitialStateTy
       return {...state, 
         status: action.payload.status}
     }
+    case 'CLEAR_MESSAGES': {
+      return {
+        ...state, 
+        messages: []
+      }
+    }
     default:
       return state
   }
 }
 
 export const actionCreators = {
-  setMessages : (messages: MessageTypeAPI[]) => ({
+  setMessages: (messages: MessageTypeAPI[]) => ({
     type: 'SET_MESSAGES',
     payload: {messages}
   } as const),
-  setStatus : (status: StatusType) => ({
+  setStatus: (status: StatusType) => ({
     type: 'SET_STATUS',
     payload: {status}
-  } as const)
+  } as const),
+  clearMessages: () => ({
+    type: 'CLEAR_MESSAGES'
+  } as const) 
 }
 
 let _newMessagesHandler: ((messages: MessageTypeAPI[]) => void) | null = null
@@ -65,7 +74,7 @@ const statusChangedHandlerCreator = (dispatch: Dispatch) => {
 }
 
 export const getMessages = (): ThunkType => {
-  return async (dispatch) => {
+  return async (dispatch) => {    
     chatAPI.start()
     chatAPI.subscribe('messages-received', newMessageHandlerCreator(dispatch))
     chatAPI.subscribe('status-changed', statusChangedHandlerCreator(dispatch))
@@ -77,6 +86,7 @@ export const stopGetMessages = (): ThunkType => {
     chatAPI.unsubscribe('messages-received', newMessageHandlerCreator(dispatch))
     chatAPI.unsubscribe('status-changed', statusChangedHandlerCreator(dispatch))
     chatAPI.stop()
+    dispatch(actionCreators.clearMessages())
   }
 }
 

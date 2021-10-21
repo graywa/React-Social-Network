@@ -33,7 +33,6 @@ class App extends Component <MapPropsType & DispatchPropsType> {
   render() {
     if (!this.props.initialized) return <Preloader />
 
-
     return (
       <div className="app-wrapper">
         <HeaderContainer/>

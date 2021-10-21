@@ -41,7 +41,7 @@ export const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
       >
         {({ isSubmitting }) => (
           <Form style={{margin: '20px 0 0 20px'}}>
-            <Field type='text' name='term' style={{padding: '3px'}}/>
+            <Field type='text' name='term' style={{padding: '3px 6px', width: '230px'}}/>
             <Field name='friend' as='select' style={{margin: '0 5px'}}>
               <option value="null">All</option>
               <option value="true">Only followed</option>

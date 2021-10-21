@@ -2,16 +2,18 @@
     grid-area: c;
     background-color: #ffe273;
 }
-
 .post__item {
     display: flex;
     margin: 10px;
 }
-
 .post__item img {
     width: 50px;
 }
-
 .post__content {
-    margin-left: 10px;
+    margin-left: 10px;    
+    background-color: #f7f4f4;
+    max-width: 250px;
+    padding: 8px 16px;
+    margin: 0 10px;  
+    border-radius: 5px;    
 }

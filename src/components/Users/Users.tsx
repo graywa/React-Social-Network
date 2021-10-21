@@ -72,8 +72,10 @@ export const Users: React.FC = React.memo((props) => {
     dispatch(unfollow(userId))
   }
 
-  const PaginatorWithProps = () => {
-    return (
+  return (
+    <div>
+      <UsersSearchForm onFilterChanged={onFilterChanged}/>
+
       <Paginator
         usersOnPage={usersOnPage}
         totalUsers={totalUsers}
@@ -81,14 +83,6 @@ export const Users: React.FC = React.memo((props) => {
         onPageChanged={onPageChanged}
         portionSize={15}
       />
-    )
-  }
-
-  return (
-    <div>
-      <UsersSearchForm onFilterChanged={onFilterChanged}/>
-
-      {PaginatorWithProps()}
 
       { usersData.length
         ? (usersData.map((u) => (
@@ -103,7 +97,13 @@ export const Users: React.FC = React.memo((props) => {
         : <h1 style={{textAlign: 'center'}}>Users not found</h1>
       }
 
-      {PaginatorWithProps()}
+      <Paginator
+        usersOnPage={usersOnPage}
+        totalUsers={totalUsers}
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        portionSize={15}
+      />
     </div>
   )
 })

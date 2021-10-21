@@ -1,25 +1,21 @@
 .container {
-    margin: 10px auto 30px;
+    margin: 10px auto;
+    padding: 10px;
 }
-
 .user {
     display: flex;
     justify-content: center;
 }
-
 .img__container {
     text-align: center;
 }
-
 .user__img {
     width: 100px;
     transition: .2s;
 }
-
 .user__img:hover {
    transform: translate3d(-2px, -2px, 0);
 }
-
 .user__info {
     margin: 0 10px;
     width: 400px;
@@ -29,50 +25,43 @@
     justify-content: space-between;
     background-color: #faf7f7;
 }
-
 .user__name {
     font-size: 18px;
     text-align: left;
     margin-bottom: 15px;
 }
-
 .user__status {
     max-width: 400px;
     font-size: 14px;
     overflow: hidden;
 }
-
 .btn {
     width: 100px;
     padding: 5px 0;
 }
-
 .btn:hover,
 .btn__pages:hover {
    cursor: pointer;
 }
-
 .selectorNumbers {
-    text-align: center;
-    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;   
+    margin: 20px 10px;
 }
-
 .selectedPage {
     font-size: 18px;
     padding: 0 3px;
     font-weight: bold;
 }
-
 .selectedPage:hover {
     cursor: pointer;
 }
-
 .unselectedPage {
     font-size: 16px;
     padding: 0 3px;
     margin: 0 3px;
 }
-
 .unselectedPage:hover {
     cursor: pointer;
 }

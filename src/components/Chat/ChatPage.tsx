@@ -1,100 +1,122 @@
-import React, { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { MessageTypeAPI } from "../../API/chat-api"
-import { getMessages, sendMessage, stopGetMessages } from "../../redux/chatReducer"
-import { AppStateType } from "../../redux/redux-store"
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { MessageTypeAPI } from '../../API/chat-api'
+import {
+  getMessages,
+  sendMessage,
+  stopGetMessages,
+} from '../../redux/chatReducer'
+import { AppStateType } from '../../redux/redux-store'
+import styles from './ChatPage.module.css'
 
-
-const ChatPage: React.FC = (props) => {
+const ChatPage: React.FC = () => {
   return (
-    <div>      
+    <div>
       <Chat />
     </div>
   )
 }
 
-const Chat: React.FC = (props) => {
+const Chat: React.FC = React.memo(() => {
   const dispatch = useDispatch()
   const status = useSelector((state: AppStateType) => state.chat.status)
 
-  useEffect (() => {
+  useEffect(() => {
     dispatch(getMessages())
     return () => {
       dispatch(stopGetMessages())
     }
   }, [])
 
-  return (    
-    <div style={{margin: '15px'}}>
-      {status === 'error' && <h2>Some error. Please refresh page</h2>}       
+  return (
+    <div className={styles.chat} >
+      {status === 'error' && <h2>Some error. Please refresh page</h2>}
       <Messages />
-      <AddMessageForm />          
-    </div>    
+      <AddMessageForm />
+    </div>
   )
-}
+})
 
 const Messages: React.FC = () => {
   const messages = useSelector((state: AppStateType) => state.chat.messages)
   const messagesAnchorRef = useRef<HTMLDivElement>(null)
   const [isAutoScroll, setIsAutoScroll] = useState(true)
 
-  useEffect (() => { 
-    if(isAutoScroll) messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})    
+  useEffect(() => {
+    if (isAutoScroll)
+      messagesAnchorRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const element = e.currentTarget
-    if (element.scrollHeight - element.scrollTop - 200 <= element.clientHeight) {      
+    if (
+      element.scrollHeight - element.scrollTop - 200 <=
+      element.clientHeight
+    ) {
       setIsAutoScroll(true)
-    } else setIsAutoScroll(false)       
+    } else setIsAutoScroll(false)
   }
 
   return (
-    <div style={{margin: '0 0 25px', height: '400px', overflow: 'auto'}} onScroll={scrollHandler}>
-      { messages.map((m, index) => <Message message={m} key={m.id} />) } 
-      <div ref={messagesAnchorRef}></div>   
-    </div>    
+    <div className={styles.messages} onScroll={scrollHandler}
+    >
+      {messages.map((m, index) => (
+        <Message message={m} key={m.id} />
+      ))}
+      <div ref={messagesAnchorRef}></div>
+    </div>
   )
 }
 
-const Message: React.FC<{message: MessageTypeAPI}> = React.memo(({message}) => {
-  console.log('message render');
+const Message: React.FC<{ message: MessageTypeAPI }> = React.memo(({ message }) => {
+
+  const ownUserId = useSelector((state: AppStateType) => state.authUser.userId)
+
+  console.log(ownUserId)
   
-  return (
-    <div>
-      <img src={message.photo} alt="avatar" style={{width: '50px'}}/> 
-      <div>
-        <b>{message.userName}</b>
+    
+    return (
+      <div className={ownUserId === message.userId ? styles.message_owner : styles.message}>        
+        <NavLink to={`/profile/${message.userId}`}>
+          <img className={styles.message__ava} 
+          src={message.photo} alt='avatar' />
+        </NavLink>
+        <div className={styles.message__content}>
+          <h3 className={styles.message__user}>{message.userName}</h3>
+          <p>{message.message}</p> 
+        </div>               
       </div>
-      <br />
-      <div>{message.message}</div>
-      <hr />
-    </div>    
-  )
-})
+    )
+  }
+)
 
 const AddMessageForm: React.FC = () => {
-
   const [message, setMessage] = useState('')
 
   const dispatch = useDispatch()
   const status = useSelector((state: AppStateType) => state.chat.status)
-  
+
   const sendMessageHandler = () => {
     if (!message) return
     dispatch(sendMessage(message))
     setMessage('')
   }
-  
+
   return (
-    <div>
-      <textarea value={message} onChange={(e => setMessage(e.currentTarget.value))}
-       style={{resize:'none'}}>{message}
-      </textarea>
-      <div>
-        <button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
+    <div className={styles.form}>
+      <div className={styles.form__text}>
+        <textarea value={message} onChange={(e) => setMessage(e.currentTarget.value)}>
+          {message}
+        </textarea>
       </div>
-    </div>    
+      
+      <div className={styles.form__button}>
+        <button disabled={status !== 'ready'} onClick={sendMessageHandler}>
+          Send
+        </button>
+      </div>
+    </div>
   )
 }
 

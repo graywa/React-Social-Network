@@ -2,7 +2,6 @@
 .formControl.error input {
     border: red 1px solid;
 }
-
 .messageError,
 .sumError
 {
@@ -12,26 +11,23 @@
     font-size: 12px;
     color: white;
 }
-
 .btn {
     text-align: center;
 }
-
 input, textarea {
+    padding: 3px 6px;
+    resize: none;
     border: 1px #dbdbdb solid;
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
 }
-
 input[type="checkbox"] {
     width: 10px;
 }
-
 .rememberMe {
     margin: 0 0 30px 15px;
     display: flex;
-
 }
-
 .login {
     background-color: #faf7f7;
     border-radius: 5px;

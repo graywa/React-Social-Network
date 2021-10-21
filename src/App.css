@@ -1,17 +1,21 @@
+* {
+    box-sizing: border-box;
+}
 .app-wrapper {
     font-family: 'Roboto', sans-serif;
     color: #4c4247;
     display: grid;
     margin: 0 auto;
-    width: 750px;
+    width: 100%;
+    max-width: 750px;
 
     grid-template-areas:
     "h h h"
     "n c c";
 
     grid-template-rows: 60px 1fr;
-    grid-auto-columns: 2fr 10fr;
-    grid-gap: 5px;
+    grid-auto-columns: 3fr 10fr;
+    grid-gap: 3px;
 }
 .app-wrapper-content {
     grid-area: c;
@@ -40,6 +44,17 @@ button:hover {
 button:disabled {
     cursor: not-allowed;
     background-color: #a07e97;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 700px) {
+    .app-wrapper {
+        grid-auto-columns: 50px 10fr;        
+    }
+    
 }
 
 

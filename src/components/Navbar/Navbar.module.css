@@ -1,30 +1,118 @@
 .nav {
     padding: 10px;
-    min-height: 360px;
+    min-height: 500px;    
+    position: relative;
 
     grid-area: n;
     background-color: #6e4c61;
     color: #fcfffe;
     border-radius: 5px;
+    transition: .2s linear;
 }
+.nav__list {    
+    padding: 10px 20px;
+    position: absolute;    
+    top: 0;
+    left: 0;
+    z-index: 10;
 
+    background-color: #6e4c61;
+    color: #fcfffe;
+    border-radius: 5px;
+    transition: .2s linear;    
+}
+.nav__list_active {
+    width: 130px;
+    padding: 10px 20px;
+    position: absolute;    
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    background-color: #6e4c61;
+    color: #fcfffe;
+    border-radius: 5px;
+    transition: .2s linear;
+    transform: translateX(53px); 
+}
 .item {
   padding: 5px;
 }
-
 .item a{
     color: #ddd1dd;
     text-decoration: none;
     display: inline-block;
     transition: .2s;
 }
-
-
 .item:hover a{
     color: white;
 }
-
 .item a.activeLink {
     color: #ffffff;
     font-weight: bold;
+}
+.burger { 
+    display: block;   
+}
+
+@media (max-width: 700px) {    
+    .nav__list {
+       transform: translateX(-150px);        
+    }
+    .burger,
+    .burger_active {  
+        position: absolute;      
+        width: 30px;
+        height: 20px;       
+        display: block; 
+        background: none;   
+    }
+    .burger:hover,
+    .burger_active:hover {
+        background: none;
+    }
+    .burger span,
+    .burger_active span,
+    .burger::before,
+    .burger::after,
+    .burger_active::before,
+    .burger_active::after {  
+        display: block; 
+        position: absolute;
+        left: 0;
+        width: 100%;        
+        height: 2px; 
+        background-color: rgb(255, 255, 255); 
+        transition: .2s linear;      
+    }
+    .burger span {
+        top: 50%;
+        transform: translateY(-50%);
+        transition: .2s linear;
+    }
+    .burger::before,
+    .burger_active::before,
+    .burger::after,
+    .burger_active::after {
+        content: '';       
+    }
+    .burger::before,
+    .burger_active::before {
+        top: 0;
+    }
+    .burger::after,
+    .burger_active::after {
+        bottom: 0;
+    }
+    .burger_active span {
+        opacity: 0;
+    }
+    .burger_active::before {
+        transform: rotate(45deg);
+        top: 50%;
+    }
+    .burger_active::after {
+        transform: rotate(-45deg);
+        top: 50%;
+    }
 }

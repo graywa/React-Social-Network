@@ -1,7 +1,6 @@
 .container {
     display: flex;
 }
-
 .description {
     width: 365px;
     border-radius: 5px;
@@ -10,31 +9,25 @@
     padding: 10px;
     background-color: #faf7f7;
 }
-
 .cover {
     text-align: center;
 }
-
 .cover__img {
     width: 100%;
 }
-
 .userPhoto {
     max-width: 200px;
     margin: 10px 0 0 10px;
 }
-
 .btnSave {
     margin-top: 15px;
     text-align: center;
 }
-
 input[type="file"] {
     margin: 0 auto;
     display: none;
     text-align: center;
 }
-
 .labelInput {
     margin-left: 55px;
     font-size: 14px;
@@ -46,19 +39,30 @@ input[type="file"] {
     color: #f1ebeb;
     transition: .2s;
 }
-
 .labelInput:hover {
     background-color: #7f586e;
 }
-
 .contact {
     margin-left: 20px;
 }
-
 .status {
-
 }
-
 .status:hover {
     cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .container {
+        display: block;       
+    }
+    .userPhotoBlock {
+        max-width: 200px;
+        margin: 20px auto;
+    }
+    .userPhoto {
+        margin: 0;
+    }
+    .description {
+        margin: 10px auto 50px auto;
+    }
 }

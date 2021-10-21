@@ -19,7 +19,7 @@ const PostForm: React.FC<InjectedFormProps<PropsFormType>> = (props) => {
             name='postArea'
             component={TextArea}
             cols='70'
-            rows='3'
+            rows='2'
             validate={[required, maxLength50]}
           ></Field>
         </div>

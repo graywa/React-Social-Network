@@ -41,7 +41,7 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
   return <div>
     <div className={classes.container}>
 
-      <div>
+      <div className={classes.userPhotoBlock}>
         <img className={classes.userPhoto} src={props.profile.photos.large || user__img}/>
         <div>
           {props.isOwner && <label className={classes.labelInput}><input

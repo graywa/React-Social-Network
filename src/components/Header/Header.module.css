@@ -1,33 +1,32 @@
-.header {
+.header {  
     grid-area: h;
     background-color: #6d4b60;
     border-radius: 5px;
 }
+.auth__block {   
+    padding: 0 5px;   
 
-.auth__block {
-    padding: 5px;
-    float: right;
 }
-
+.login__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .login {
     margin: 3px;
     text-align: center;
     color: white;
     text-decoration: none;
 }
-
 .btn {
     font-size: 12px;
     margin: 0 5px;
     background-color: #62445c;
 }
-
 .user__ava {
     max-height: 50px;
-    margin: 5px;
-    transition: border .5s linear;
+    margin: 5px 10px;    
 }
-
 .user__ava:hover {
-    border: 1px #373737 solid;
+    
 }
